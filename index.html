@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Kaalamithra AI Tech Solution | Company Portfolio</title>
+
+    <link rel="stylesheet" href="style.css?v=9">
+    <link rel="stylesheet" href="add_desktop_links.css?v=9">
+</head>
+
+<body>
+
+    <main class="portfolio-page">
+
+        <section class="portfolio-hero">
+
+            <!-- =====================================
+                 PORTFOLIO IMAGE + SERVICE LINKS WRAPPER
+                 The image and every service link live in
+                 the SAME container. The desktop tilt/float
+                 animation transforms this wrapper, so the
+                 image and its clickable areas always move
+                 together and stay exactly aligned.
+            ====================================== -->
+
+            <div class="portfolio-image-wrapper">
+
+                <!-- Company Portfolio Image -->
+                <img
+                    src="images/company-portfolio.jpg"
+                    alt="Kaalamithra AI Tech Solution Company Portfolio"
+                    class="portfolio-image"
+                >
+
+
+                <!-- =====================================
+                     AI & AUTOMATION SOLUTIONS
+                ====================================== -->
+
+                <a
+                    href="ai-automation.html"
+                    class="ai-automation-link"
+                    aria-label="AI and Automation Solutions"
+                    title="AI & Automation Solutions"
+                >
+                </a>
+
+
+                <!-- =====================================
+                     WEB & APP DEVELOPMENT
+                ====================================== -->
+
+                <a
+                    href="web-app-development.html"
+                    class="web-app-development-link"
+                    aria-label="Web and App Development"
+                    title="Web & App Development"
+                >
+                </a>
+
+
+                <!-- =====================================
+                     SERVICE 3
+                ====================================== -->
+
+                <a
+                    href="ecommerce.html"
+                    class="service-3-link"
+                    aria-label="E-Commerce Solutions"
+                    title="E-Commerce Solutions"
+                >
+                </a>
+
+
+                <!-- =====================================
+                     SERVICE 4
+                ====================================== -->
+
+                <a
+                    href="service-4.html"
+                    class="service-4-link"
+                    aria-label="Service 4"
+                    title="Service 4"
+                >
+                </a>
+
+
+                <!-- =====================================
+                     SERVICE 5
+                ====================================== -->
+
+                <a
+                    href="support-maintenance.html"
+                    class="service-5-link"
+                    aria-label="Support & Maintenance"
+                    title="Support & Maintenance"
+                >
+                </a>
+
+            </div>
+
+
+            <!-- =====================================
+                 PROJECTS BUTTON
+            ====================================== -->
+
+            <a
+                href="projects.html"
+                class="projects-button"
+                aria-label="Projects"
+            >
+
+                <span class="projects-icon">▣</span>
+
+                <span class="projects-text">
+                    Projects
+                </span>
+
+            </a>
+
+        </section>
+
+    </main>
+
+    <script>
+        (function () {
+            // Desktop: mouse-based 3D tilt + always-visible 3D motion.
+            // The gentle auto-tilt oscillation and continuous float keep
+            // the embedded company logo, "KAALA MITHRA" name and
+            // "Company Portfolio" text smoothly animating in 3D even
+            // without mouse interaction — exactly like the mobile view.
+            if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+                var hero = document.querySelector('.portfolio-hero');
+                var wrapper = document.querySelector('.portfolio-image-wrapper');
+
+                if (hero && wrapper) {
+                    var targetRotateX = 0;
+                    var targetRotateY = 0;
+                    var currentRotateX = 0;
+                    var currentRotateY = 0;
+                    var currentFloatY = 0;
+                    var isHovering = false;
+                    var time = 0;
+
+                    var MAX_TILT = 4;
+
+                    hero.addEventListener('mousemove', function (event) {
+                        var rect = hero.getBoundingClientRect();
+                        var offsetX = (event.clientX - rect.left) / rect.width - 0.5;
+                        var offsetY = (event.clientY - rect.top) / rect.height - 0.5;
+                        targetRotateY = offsetX * MAX_TILT * 2;
+                        targetRotateX = -offsetY * MAX_TILT * 2;
+                        isHovering = true;
+                    });
+
+                    hero.addEventListener('mouseleave', function () {
+                        targetRotateX = 0;
+                        targetRotateY = 0;
+                        isHovering = false;
+                    });
+
+                    function animateDesktop() {
+                        time += 0.016;
+                        currentRotateX += (targetRotateX - currentRotateX) * 0.08;
+                        currentRotateY += (targetRotateY - currentRotateY) * 0.08;
+
+                        // Always-visible 3D motion: gentle auto-tilt oscillation
+                        // (same as mobile) so the logo, name and portfolio text
+                        // continuously float in 3D even when the mouse is idle.
+                        var autoTiltX = Math.sin(time * 0.4) * 3;
+                        var autoTiltY = Math.cos(time * 0.3) * 4;
+                        var effectiveRotateX = currentRotateX + autoTiltX;
+                        var effectiveRotateY = currentRotateY + autoTiltY;
+
+                        var floatAmplitude = isHovering ? 4 : 6;
+                        var floatSpeed = isHovering ? 1.2 : 0.8;
+                        var targetFloatY = Math.sin(time * floatSpeed) * floatAmplitude;
+                        currentFloatY += (targetFloatY - currentFloatY) * 0.05;
+                        wrapper.style.transform =
+                            'perspective(1200px) ' +
+                            'rotateX(' + effectiveRotateX.toFixed(3) + 'deg) ' +
+                            'rotateY(' + effectiveRotateY.toFixed(3) + 'deg) ' +
+                            'translateY(' + currentFloatY.toFixed(3) + 'px)';
+                        requestAnimationFrame(animateDesktop);
+                    }
+                    animateDesktop();
+                }
+            }
+
+            // Mobile: 3D tilt + float effect (always visible, plus touch interaction)
+            if (window.matchMedia('(hover: none), (pointer: coarse)').matches) {
+                var hero = document.querySelector('.portfolio-hero');
+                // On mobile the visible image is the hero's background
+                // (prot.2.jpeg) because .portfolio-image is hidden.
+                // So transform the hero itself for visible 3D motion.
+                var wrapper = hero;
+
+                if (hero && wrapper) {
+                    var targetRotateX = 0;
+                    var targetRotateY = 0;
+                    var currentRotateX = 0;
+                    var currentRotateY = 0;
+                    var currentFloatY = 0;
+                    var isTouching = false;
+                    var time = 0;
+
+                    var MAX_TILT = 8; // Slightly larger for mobile
+
+                    hero.addEventListener('touchstart', function (event) {
+                        var touch = event.touches[0];
+                        if (touch) {
+                            var rect = hero.getBoundingClientRect();
+                            var offsetX = (touch.clientX - rect.left) / rect.width - 0.5;
+                            var offsetY = (touch.clientY - rect.top) / rect.height - 0.5;
+                            targetRotateY = offsetX * MAX_TILT * 2;
+                            targetRotateX = -offsetY * MAX_TILT * 2;
+                            isTouching = true;
+                        }
+                    });
+
+                    hero.addEventListener('touchmove', function (event) {
+                        var touch = event.touches[0];
+                        if (touch) {
+                            var rect = hero.getBoundingClientRect();
+                            var offsetX = (touch.clientX - rect.left) / rect.width - 0.5;
+                            var offsetY = (touch.clientY - rect.top) / rect.height - 0.5;
+                            targetRotateY = offsetX * MAX_TILT * 2;
+                            targetRotateX = -offsetY * MAX_TILT * 2;
+                        }
+                    });
+
+                    hero.addEventListener('touchend', function () {
+                        targetRotateX = 0;
+                        targetRotateY = 0;
+                        isTouching = false;
+                    });
+
+                    function animateMobile() {
+                        time += 0.016;
+                        currentRotateX += (targetRotateX - currentRotateX) * 0.08;
+                        currentRotateY += (targetRotateY - currentRotateY) * 0.08;
+
+                        // Always-visible 3D motion: gentle auto-tilt oscillation
+                        // plus the same continuous float animation as desktop.
+                        var autoTiltX = Math.sin(time * 0.4) * 3;
+                        var autoTiltY = Math.cos(time * 0.3) * 4;
+                        var effectiveRotateX = currentRotateX + autoTiltX;
+                        var effectiveRotateY = currentRotateY + autoTiltY;
+
+                        var floatAmplitude = isTouching ? 4 : 6;
+                        var floatSpeed = isTouching ? 1.2 : 0.8;
+                        var targetFloatY = Math.sin(time * floatSpeed) * floatAmplitude;
+                        currentFloatY += (targetFloatY - currentFloatY) * 0.05;
+                        wrapper.style.transform =
+                            'perspective(1200px) ' +
+                            'rotateX(' + effectiveRotateX.toFixed(3) + 'deg) ' +
+                            'rotateY(' + effectiveRotateY.toFixed(3) + 'deg) ' +
+                            'translateY(' + currentFloatY.toFixed(3) + 'px)';
+                        requestAnimationFrame(animateMobile);
+                    }
+                    animateMobile();
+                }
+            }
+        })();
+    </script>
+
+</body>
+
+</html>
