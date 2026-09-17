@@ -93,6 +93,26 @@ never silently lost. Delivery order is Resend → webhook → local backup only.
 Built in: server-side validation, a hidden honeypot field for bots, a
 per-IP throttle (5 submissions / 10 min), and inline error/loading states.
 
+## Deploying to Vercel
+
+This is a **Next.js app**, so the Vercel project must be configured as such —
+otherwise the build output is ignored and the site 404s.
+
+| Setting (Project → Settings → Build & Development) | Required value |
+| --- | --- |
+| Framework Preset | **Next.js** |
+| Root Directory | repo root (empty / `./`) — **not** `public` |
+| Build Command | default (`npm run build`) |
+| Output Directory | **leave empty** — do not set `public` or `out` |
+
+`vercel.json` already pins `"framework": "nextjs"` so it cannot regress. The
+Output Directory must stay unset: setting it turns the deployment into a plain
+static site and **disables all App Router pages and the `/api/contact` route**.
+
+Also add the environment variables from `.env.example` to
+Project → Settings → Environment Variables (Production + Preview), since
+`.env.local` is never committed.
+
 ## Structure
 
 ```
