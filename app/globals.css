@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    @apply bg-white font-sans text-brand-ink antialiased;
+  }
+
+  ::selection {
+    @apply bg-brand-blue/20 text-brand-ink;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-brand-blue via-brand-purple to-brand-magenta bg-clip-text text-transparent;
+  }
+}
+
+/* Thin brand scrollbar for the side rail's scrollable tab list */
+.km-rail-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(219, 39, 119, 0.35) transparent;
+}
+.km-rail-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+.km-rail-scroll::-webkit-scrollbar-thumb {
+  background: rgba(219, 39, 119, 0.35);
+  border-radius: 9999px;
+}
+.km-rail-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ---- 3D animated side rail ---- */
+:root {
+  /* default (expanded) rail width + breathing room; SideRail updates it live */
+  --km-rail-w: 104px;
+}
+.km-rail-perspective {
+  perspective: 1000px;
+}
+.km-dock {
+  transform: rotateY(10deg);
+  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.km-rail-perspective:hover .km-dock,
+.km-rail-perspective:focus-within .km-dock {
+  transform: rotateY(0deg);
+}
+.km-tab {
+  transform-style: preserve-3d;
+  transition: transform 0.25s ease, background-color 0.2s ease, color 0.2s ease;
+}
+.km-tab:hover,
+.km-tab:focus-visible {
+  transform: translateZ(16px) scale(1.05);
+}
+.km-tab-icon {
+  display: inline-flex;
+  transition: transform 0.25s ease;
+}
+.km-tab:hover .km-tab-icon,
+.km-tab:focus-visible .km-tab-icon {
+  transform: translateZ(24px) rotate(-6deg) scale(1.08);
+}
+.km-active-tab {
+  background-size: 200% 200%;
+  animation: km-gradient-pan 3s linear infinite alternate,
+    km-glow-pulse 2.6s ease-in-out infinite;
+}
+@keyframes km-gradient-pan {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
+}
+@keyframes km-glow-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 12px rgba(219, 39, 119, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 26px rgba(249, 115, 22, 0.6);
+  }
+}
+.km-tip {
+  animation: km-tip-in 0.18s ease-out both;
+}
+@keyframes km-tip-in {
+  from {
+    opacity: 0;
+    transform: translate(-6px, -50%) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, -50%) scale(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .km-dock,
+  .km-tab,
+  .km-tab-icon {
+    transform: none !important;
+    transition: none !important;
+  }
+  .km-active-tab,
+  .km-tip {
+    animation: none !important;
+  }
+  .km-tip {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+}

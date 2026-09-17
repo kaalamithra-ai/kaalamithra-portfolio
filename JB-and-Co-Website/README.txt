@@ -1,1 +1,0 @@
-Open index.html in a browser. The uploaded BE.01.jpeg image is displayed responsively.

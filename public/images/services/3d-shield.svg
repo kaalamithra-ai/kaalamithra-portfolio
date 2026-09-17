@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" fill="none">
+  <defs>
+    <linearGradient id="sh" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2563EB"/><stop offset="0.55" stop-color="#1D4ED8"/><stop offset="1" stop-color="#0EA5E9"/>
+    </linearGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22D3EE"/><stop offset="1" stop-color="#DB2777"/>
+    </linearGradient>
+    <linearGradient id="lock" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8B5CF6"/><stop offset="1" stop-color="#6D28D9"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="120" cy="214" rx="82" ry="13" fill="#0B1220" opacity="0.08"/>
+  <!-- orbit ring -->
+  <ellipse cx="120" cy="126" rx="98" ry="30" stroke="url(#ring)" stroke-width="4" opacity="0.55" transform="rotate(-16 120 126)"/>
+  <!-- shield -->
+  <path d="M120 26 L184 52 V112 C184 162 154 198 120 214 C86 198 56 162 56 112 V52 Z" fill="url(#sh)"/>
+  <path d="M120 26 L184 52 V112 C184 128 181 143 176 156 L96 38 Z" fill="#FFFFFF" opacity="0.14"/>
+  <path d="M120 40 L172 61 V112 C172 154 147 186 120 200 C93 186 68 154 68 112 V61 Z" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="3"/>
+  <!-- check -->
+  <path d="M94 116 l20 22 l38 -50" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- padlock -->
+  <g transform="translate(178 150)">
+    <rect x="0" y="14" width="40" height="32" rx="8" fill="url(#lock)"/>
+    <path d="M8 14 v-6 a12 12 0 0 1 24 0 v6" stroke="#7C3AED" stroke-width="6" fill="none"/>
+    <circle cx="20" cy="28" r="5" fill="#FFFFFF"/>
+    <rect x="18" y="30" width="4" height="9" rx="2" fill="#FFFFFF"/>
+  </g>
+  <!-- glow dots -->
+  <circle cx="42" cy="70" r="5" fill="#22D3EE"/>
+  <circle cx="30" cy="150" r="4" fill="#DB2777" opacity="0.85"/>
+  <circle cx="206" cy="60" r="4" fill="#7C3AED" opacity="0.85"/>
+</svg>

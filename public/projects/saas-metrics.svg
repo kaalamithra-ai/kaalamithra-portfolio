@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" font-family="Arial, Helvetica, sans-serif">
+  <rect width="640" height="400" rx="16" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="640" height="44" rx="16" fill="#F1F5F9"/>
+  <circle cx="24" cy="22" r="5" fill="#CBD5E1"/><circle cx="42" cy="22" r="5" fill="#CBD5E1"/><circle cx="60" cy="22" r="5" fill="#CBD5E1"/>
+  <text x="84" y="27" fill="#6D28D9" font-size="14" font-weight="bold">Early Traction — post-launch metrics</text>
+  <!-- activation line -->
+  <rect x="28" y="64" width="380" height="200" rx="14" fill="#FAFAFF" stroke="#E2E8F0"/>
+  <text x="48" y="92" fill="#64748B" font-size="11">WEEKLY ACTIVE WORKSPACES</text>
+  <polyline points="52,230 108,214 164,196 220,168 276,150 332,118 384,96" fill="none" stroke="#7C3AED" stroke-width="5" stroke-linecap="round"/>
+  <g fill="#7C3AED"><circle cx="52" cy="230" r="5"/><circle cx="164" cy="196" r="5"/><circle cx="276" cy="150" r="5"/><circle cx="384" cy="96" r="6" fill="#DB2777"/></g>
+  <text x="48" y="252" fill="#94A3B8" font-size="10">Weeks 1–7 after launch</text>
+  <!-- checklist card -->
+  <rect x="428" y="64" width="184" height="200" rx="14" fill="#F5F3FF"/>
+  <text x="448" y="94" fill="#4C1D95" font-size="12" font-weight="bold">LAUNCH CHECKLIST</text>
+  <g font-size="12" fill="#334155">
+    <rect x="448" y="110" width="16" height="16" rx="4" fill="#7C3AED"/><path d="M452 118 l4 4 7 -8" stroke="#fff" stroke-width="2.5" fill="none"/>
+    <text x="474" y="123">Workspace setup</text>
+    <rect x="448" y="140" width="16" height="16" rx="4" fill="#7C3AED"/><path d="M452 148 l4 4 7 -8" stroke="#fff" stroke-width="2.5" fill="none"/>
+    <text x="474" y="153">Team invited</text>
+    <rect x="448" y="170" width="16" height="16" rx="4" fill="#7C3AED"/><path d="M452 178 l4 4 7 -8" stroke="#fff" stroke-width="2.5" fill="none"/>
+    <text x="474" y="183">AI connected</text>
+    <rect x="448" y="200" width="16" height="16" rx="4" fill="#fff" stroke="#A78BFA"/><text x="474" y="213">Billing live</text>
+  </g>
+  <!-- bottom stats -->
+  <g font-size="12">
+    <rect x="28" y="284" width="184" height="80" rx="12" fill="#EFF6FF"/>
+    <text x="48" y="312" fill="#64748B" font-size="11">SIGNUPS</text>
+    <text x="48" y="342" fill="#1D4ED8" font-size="22" font-weight="bold">1,240</text>
+    <rect x="228" y="284" width="184" height="80" rx="12" fill="#FDF2F8"/>
+    <text x="248" y="312" fill="#64748B" font-size="11">ACTIVATION RATE</text>
+    <text x="248" y="342" fill="#BE185D" font-size="22" font-weight="bold">64%</text>
+    <rect x="428" y="284" width="184" height="80" rx="12" fill="#ECFEFF"/>
+    <text x="448" y="312" fill="#64748B" font-size="11">NPS</text>
+    <text x="448" y="342" fill="#0E7490" font-size="22" font-weight="bold">+52</text>
+  </g>
+</svg>
