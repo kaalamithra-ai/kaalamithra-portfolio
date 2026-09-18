@@ -16,7 +16,6 @@ import ProjectGrid from "@/components/ProjectGrid";
 import ProcessTimeline from "@/components/ProcessTimeline";
 import WhySection from "@/components/WhySection";
 import CTASection from "@/components/CTASection";
-import JsonLd from "@/components/JsonLd";
 import { SERVICES } from "@/data/services";
 import { PROJECTS } from "@/data/projects";
 import { MISSION, PROCESS_STEPS, VALUE_PROPS, VISION } from "@/data/company";
@@ -215,7 +214,6 @@ export default function Home() {
       <div className="pt-20 sm:pt-24">
         <CTASection />
       </div>
-      />
     </>
   );
 }
