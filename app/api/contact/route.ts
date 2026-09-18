@@ -23,12 +23,13 @@ import {
  *   2. `CONTACT_WEBHOOK_URL` → POST the enquiry to any webhook
  *                              (Formspree, Zapier, Make, Google Apps Script…)
  *   3. Neither set           → the enquiry is written to
- *                              `.data/contact-enquiries.jsonl` and logged, so
- *                              nothing is ever silently lost in development.
+ *                              `.data/contact-enquiries.jsonl` and logged.
  *
  * A local JSONL backup is kept for every submission unless
- * `CONTACT_FILE_BACKUP=false`. On serverless hosts (e.g. Vercel) the
- * filesystem is ephemeral, so configure option 1 or 2 before going live.
+ * `CONTACT_FILE_BACKUP=false`. On serverless hosts (e.g. Vercel) the filesystem
+ * is ephemeral, so the backup is skipped there — and if no provider (option 1
+ * or 2) is configured the request FAILS with a 502 so the visitor is asked to
+ * email instead. A dropped enquiry is never reported as a success.
  */
 
 export const runtime = "nodejs";
@@ -39,7 +40,10 @@ const SENDER =
   process.env.CONTACT_FROM_EMAIL ||
   "KAALAMITHRA Website <onboarding@resend.dev>";
 const WEBHOOK_URL = process.env.CONTACT_WEBHOOK_URL;
-const FILE_BACKUP = process.env.CONTACT_FILE_BACKUP !== "false";
+// Serverless hosts (Vercel) have an ephemeral filesystem, so the JSONL backup
+// is only available locally — see `deliver()` below.
+const FILE_BACKUP =
+  process.env.CONTACT_FILE_BACKUP !== "false" && !process.env.VERCEL;
 
 /** Simple in-memory throttle: max 5 submissions per IP per 10 minutes. */
 const RATE_LIMIT_MAX = 5;
@@ -120,8 +124,18 @@ async function sendViaWebhook(enquiry: ContactEnquiry): Promise<void> {
   }
 }
 
-/** Delivers the enquiry to whichever channel is configured. */
-async function deliver(enquiry: ContactEnquiry): Promise<void> {
+/**
+ * Delivers the enquiry to whichever channel is configured.
+ *
+ * `fileBackupSaved` tells us whether the enquiry already reached the local
+ * JSONL backup. On serverless hosts the backup does not exist, so if no
+ * provider is configured there is nowhere for the enquiry to go — in that case
+ * we throw so the caller returns an error instead of a false success.
+ */
+async function deliver(
+  enquiry: ContactEnquiry,
+  fileBackupSaved: boolean
+): Promise<void> {
   if (process.env.RESEND_API_KEY) {
     await sendViaResend(enquiry);
     return;
@@ -132,11 +146,19 @@ async function deliver(enquiry: ContactEnquiry): Promise<void> {
     return;
   }
 
-  // No provider configured yet — keep the enquiry so it is never lost.
+  if (!fileBackupSaved) {
+    throw new Error(
+      "No delivery channel configured — set RESEND_API_KEY or CONTACT_WEBHOOK_URL " +
+        "(see .env.example / README). Refusing to report a false success."
+    );
+  }
+
+  // Local development only: nothing configured, so the JSONL backup and the
+  // server log are the destinations.
   console.warn(
     "[contact] No RESEND_API_KEY or CONTACT_WEBHOOK_URL configured. " +
       "Enquiry stored in .data/contact-enquiries.jsonl only. " +
-      "See README → Connecting the contact form."
+      "See README → Where enquiries go (contact form)."
   );
   console.info("[contact] New enquiry:\n" + enquiryText(enquiry));
 }
@@ -183,16 +205,18 @@ export async function POST(request: Request) {
     );
   }
 
-  if (FILE_BACKUP && !process.env.VERCEL) {
+  let fileBackupSaved = false;
+  if (FILE_BACKUP) {
     try {
       await saveToFile(enquiry);
+      fileBackupSaved = true;
     } catch (error) {
       console.error("[contact] Could not write local backup:", error);
     }
   }
 
   try {
-    await deliver(enquiry);
+    await deliver(enquiry, fileBackupSaved);
   } catch (error) {
     console.error("[contact] Delivery failed:", error);
     return NextResponse.json(

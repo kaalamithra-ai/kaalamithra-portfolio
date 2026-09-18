@@ -87,8 +87,12 @@ client's address.
 
 Whatever is configured, the route also keeps a JSONL backup in
 `.data/contact-enquiries.jsonl` (except on Vercel, where the filesystem is
-ephemeral) and logs the enquiry to the server console — so a submission is
-never silently lost. Delivery order is Resend → webhook → local backup only.
+ephemeral) and logs the enquiry to the server console. Delivery order is
+Resend → webhook → local backup.
+
+If none of those destinations exist (e.g. on Vercel with no env vars set) the
+route returns a `502` and the visitor is asked to email you directly — it never
+reports a success for an enquiry that was dropped.
 
 Built in: server-side validation, a hidden honeypot field for bots, a
 per-IP throttle (5 submissions / 10 min), and inline error/loading states.
