@@ -236,7 +236,7 @@ export default function Home() {
           name: COMPANY_NAME,
           slogan: TAGLINE,
           url: SITE_URL,
-          logo: `${SITE_URL}/logo.png`,
+          logo: `${SITE_URL},
         }}
       />
     </>
