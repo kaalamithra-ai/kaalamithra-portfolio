@@ -5,12 +5,14 @@ import { SITE_URL } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
-  const staticRoutes = ["", "/services", "/portfolio", "/contact"].map(
+  // "/" is intentionally absent: it 307-redirects to /portfolio (see
+  // next.config.mjs), and sitemaps should only list canonical, served URLs.
+  const staticRoutes = ["/services", "/portfolio", "/contact"].map(
     (route) => ({
       url: `${SITE_URL}${route}`,
       lastModified,
       changeFrequency: "weekly" as const,
-      priority: route === "" ? 1 : 0.8,
+      priority: route === "/portfolio" ? 1 : 0.8,
     }),
   );
 
