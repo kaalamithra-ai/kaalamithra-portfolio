@@ -45,7 +45,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section id="contact-form" className="scroll-mt-24 py-20 sm:py-24" aria-label="Contact form">
+      <section id="contact-form" className="scroll-mt-28 py-20 sm:py-24" aria-label="Contact form">
         <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-3 lg:px-8">
           <Reveal className="lg:col-span-2">
             <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-card sm:p-10">

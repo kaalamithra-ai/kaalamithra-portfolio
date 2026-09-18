@@ -168,7 +168,7 @@ export default function SideRail({
     <nav
       ref={navRef}
       aria-label="On-page section navigation"
-      className={`fixed bottom-16 left-0 top-24 z-40 flex flex-col border-r border-slate-200/80 bg-white/95 backdrop-blur-xl transition-[width] duration-300 dark:border-white/10 dark:bg-brand-ink/95 ${
+      className={`fixed bottom-16 left-0 top-28 z-40 flex flex-col border-r border-slate-200/80 bg-white/95 backdrop-blur-xl transition-[width] duration-300 dark:border-white/10 dark:bg-brand-ink/95 ${
         collapsed ? "w-[52px]" : "w-[96px]"
       }`}
     >

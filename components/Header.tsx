@@ -24,9 +24,9 @@ export default function Header() {
         scrolled ? "border-slate-200 shadow-card" : "border-transparent"
       }`}
     >
-      <div className="mx-auto flex h-24 max-w-7xl items-center px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-28 max-w-7xl items-center px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center" aria-label="KAALAMITHRA home">
-          <Logo className="h-14 w-auto sm:h-16" />
+          <Logo className="h-16 w-auto sm:h-20" />
         </Link>
       </div>
     </header>

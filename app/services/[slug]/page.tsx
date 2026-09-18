@@ -261,7 +261,7 @@ export default function ServiceDetailPage({ params }: Props) {
       </section>
 
       {/* 8 — Related projects */}
-      <section id="related-projects" className="scroll-mt-24 py-16 sm:py-20" aria-label="Related projects">
+      <section id="related-projects" className="scroll-mt-28 py-16 sm:py-20" aria-label="Related projects">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Proof"

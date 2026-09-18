@@ -7,7 +7,6 @@ import {
   Target,
   type LucideIcon,
 } from "lucide-react";
-import Logo from "@/components/Logo";
 import ButtonLink from "@/components/Button";
 import HeroVideo from "@/components/HeroVideo";
 import Reveal from "@/components/Reveal";
@@ -58,8 +57,8 @@ export default function Home() {
           aria-hidden="true"
           className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-brand-navy to-transparent"
         />
-        <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-4 py-24 sm:px-6 lg:grid-cols-2 lg:px-8 lg:py-32">
-          <Reveal>
+        <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
+          <Reveal className="max-w-3xl">
             <p className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-brand-cyan backdrop-blur">
               {TAGLINE}
             </p>
@@ -83,18 +82,6 @@ export default function Home() {
             <p className="mt-8 text-sm font-semibold tracking-wide text-slate-400">
               11 powerful services · one complete growth partner
             </p>
-          </Reveal>
-          <Reveal delay={150} className="hidden justify-center lg:flex">
-            <div className="relative">
-              <div
-                aria-hidden="true"
-                className="absolute inset-0 scale-110 rounded-full bg-gradient-to-br from-brand-blue/30 via-brand-purple/30 to-brand-magenta/30 blur-3xl"
-              />
-              <Logo
-                priority
-                className="relative w-full max-w-lg rounded-2xl shadow-lift"
-              />
-            </div>
           </Reveal>
         </div>
       </section>
