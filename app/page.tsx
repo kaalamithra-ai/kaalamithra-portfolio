@@ -215,16 +215,6 @@ export default function Home() {
       <div className="pt-20 sm:pt-24">
         <CTASection />
       </div>
-
-      <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          name: COMPANY_NAME,
-          slogan: TAGLINE,
-          url: SITE_URL,
-          logo: `${SITE_URL}/logo.png`,
-        }}
       />
     </>
   );
