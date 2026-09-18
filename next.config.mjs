@@ -11,8 +11,10 @@ const nextConfig = {
    * `permanent: true` (308) once the site structure is final so search engines
    * consolidate the home URL into /portfolio.
    *
-   * Note: app/page.tsx (the home page) is intentionally kept on disk, so
-   * removing this entry restores the home page at "/" instantly.
+   * Note: the home page lives at "/home" (app/home/page.tsx) and the "Home"
+   * links point there. No page is defined for "/" itself, so deleting this
+   * entry would make the root URL 404 — turn it into a rewrite instead if you
+   * ever want "/" to render a page again.
    */
   async redirects() {
     return [

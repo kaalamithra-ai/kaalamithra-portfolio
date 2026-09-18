@@ -31,7 +31,7 @@ import {
 export const metadata: Metadata = {
   title: `AI-Powered Solutions for Smarter Business Growth | ${COMPANY_NAME}`,
   description: HERO_SUPPORT,
-  alternates: { canonical: SITE_URL },
+  alternates: { canonical: `${SITE_URL}/home` },
 };
 
 const VALUE_ICONS: Record<ValueProp["icon"], LucideIcon> = {

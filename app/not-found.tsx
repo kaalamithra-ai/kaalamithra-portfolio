@@ -16,7 +16,7 @@ export default function NotFound() {
         The link may be outdated. Head back home or explore our services instead.
       </p>
       <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-        <ButtonLink href="/">Back to Home</ButtonLink>
+        <ButtonLink href="/home">Back to Home</ButtonLink>
         <ButtonLink href="/services" variant="secondary">
           Explore Services
         </ButtonLink>

@@ -33,7 +33,7 @@ export default function Footer() {
             </h3>
             <ul className="mt-5 space-y-3 text-sm">
               {[
-                { href: "/", label: "Home" },
+                { href: "/home", label: "Home" },
                 { href: "/services", label: "Services" },
                 { href: "/portfolio", label: "Portfolio" },
                 { href: "/contact", label: "Contact" },

@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { FolderKanban, Home, LayoutGrid, Send } from "lucide-react";
 
 const ITEMS = [
-  { href: "/", label: "Home", Icon: Home },
+  { href: "/home", label: "Home", Icon: Home },
   { href: "/services", label: "Services", Icon: LayoutGrid },
   { href: "/portfolio", label: "Portfolio", Icon: FolderKanban },
   { href: "/contact", label: "Start a Project", Icon: Send },
@@ -25,8 +25,8 @@ export default function BottomNav() {
     >
       <div className="mx-auto grid w-full max-w-md grid-cols-4">
         {ITEMS.map(({ href, label, Icon }) => {
-          const active =
-            href === "/" ? pathname === "/" : pathname.startsWith(href);
+          // Exact match or a sub-path, so "/home" never matches "/homepage".
+          const active = pathname === href || pathname.startsWith(`${href}/`);
           return (
             <Link
               key={href}
